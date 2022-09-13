@@ -59,6 +59,13 @@
     float: left;
     padding: 10px;
     text-align: left;
+    height: 200px;
+    overflow: hidden;
+}
+
+.section-content:hover {
+    overflow-y: scroll !important;
+    cursor: n-resize;
 }
 
 .chicken {
