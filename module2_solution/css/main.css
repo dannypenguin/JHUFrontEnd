@@ -18,12 +18,17 @@
 
 .showCategoriesHeader {
     display: none;
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    font-size: 150%;
+    font-family: 'Courier New', Courier, monospace
 }
 
 .section {
+    display: inline-block;
     background-color: gray;
     opacity: 80%;
-    display: inline-block;
     overflow: auto;
     border: 1px solid black;
     position: relative;
@@ -198,25 +203,17 @@
 @media (max-width: 767px) {
     .showCategoriesHeader {
         display: block;
-        text-align: left;
-        margin-top: 30px;
-        margin-bottom: 60px;
-        font-size: 150%;
-        font-family: 'Courier New', Courier, monospace
     }
     .showMenuHeader {
         display: none;
     }
     .section-content {
-        float: left;
-        padding: 10px;
         text-align: center;
     }
     .section-title {
         display: none;
     }
     .section-mobile-title {
-        width: 100%;
         display: block;
     }
     .col-sm-1,
