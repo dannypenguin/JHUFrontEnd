@@ -4,7 +4,7 @@
     color: black;
     padding: 0;
     margin: 0;
-    border: 0;
+    border: 1px;
     box-sizing: border-box;
 }
 
@@ -30,10 +30,9 @@ h1 {
     font-weight: 700;
     float: right;
     padding: 5px;
-    width: 33%;
+    width: 33.33%;
     text-align: center;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+    border: 1px solid black;
 }
 
 .section-content {
@@ -136,44 +135,44 @@ h1 {
     .col-md-11,
     .col-md-12 {
         float: left;
-        margin-left: 2%;
-        margin-right: 2%;
+        margin-left: 3%;
+        margin-right: 3%;
     }
     .col-md-1 {
-        width: 4.33%;
+        width: 2.33%;
     }
     .col-md-2 {
-        width: 12.66%;
+        width: 10.66%;
     }
     .col-md-3 {
-        width: 21%;
+        width: 19%;
     }
     .col-md-4 {
-        width: 29.33%;
+        width: 27.33%;
     }
     .col-md-5 {
-        width: 37.66%;
+        width: 35.66%;
     }
     .col-md-6 {
-        width: 46%;
+        width: 44%;
     }
     .col-md-7 {
-        width: 54.33%;
+        width: 52.33%;
     }
     .col-md-8 {
-        width: 62.66%;
+        width: 60.66%;
     }
     .col-md-9 {
-        width: 70.99%;
+        width: 68.99%;
     }
     .col-md-10 {
-        width: 79.33%;
+        width: 77.33%;
     }
     .col-md-11 {
-        width: 87.66%;
+        width: 85.66%;
     }
     .col-md-12 {
-        width: 96%;
+        width: 94%;
     }
 }
 
