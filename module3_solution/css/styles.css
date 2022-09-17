@@ -1,0 +1,40 @@
+.section-content {
+    background-color: transparent;
+    margin-bottom: 30px;
+    height: 700px;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+#chicken {
+    background-color: #ffbebe;
+}
+
+#beef {
+    background-color: #f08080;
+}
+
+#sushi {
+    background-color: #ffdB58;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse {
+        background-color: #002D72;
+    }
+    .navbar-default .navbar-nav>li>a {
+        color: white;
+        text-align: center;
+    }
+    .section-content {
+        height: auto;
+        text-align: center;
+        padding: 4%;
+        margin: 4%;
+    }
+}
