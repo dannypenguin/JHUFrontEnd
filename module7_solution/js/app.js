@@ -4,7 +4,8 @@
     angular.module('ShoppingListCheckOff', [])
         .controller('ToBuyController', ToBuyController)
         .controller('AlreadyBoughtController', AlreadyBoughtController)
-        .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
+        .service('ShoppingListCheckOffService', ShoppingListCheckOffService)
+        .filter('trippleDollars', trippleDollarSignsFilter);
 
     ToBuyController.$inject = ["ShoppingListCheckOffService"]
 
@@ -13,8 +14,23 @@
         toBuy.shoppingList = ShoppingListCheckOffService.getToBuyItems();
 
         toBuy.updateShoppingLists = function(index) {
-            ShoppingListCheckOffService.addItem(toBuy.shoppingList[index].name, toBuy.shoppingList[index].quantity)
+            ShoppingListCheckOffService.addItem(toBuy.shoppingList[index].name, toBuy.shoppingList[index].quantity, toBuy.shoppingList[index].pricePerItem)
             ShoppingListCheckOffService.removeItem(index);
+        }
+
+        // this validates on ng-blur and ng-change to protect us from illogical values
+        toBuy.validateInput = function(index, value, replaceValue) {
+            if (value) {
+                // I chose to parse it as a float and then round because the UX was better.
+                value = Number.parseFloat(value);
+                if (Number.isNaN(value) || value < 0) {
+                    toBuy.shoppingList[index].quantity = replaceValue;
+                } else {
+                    toBuy.shoppingList[index].quantity = Math.round(value);
+                }
+            } else {
+                toBuy.shoppingList[index].quantity = replaceValue;
+            }
         }
     }
 
@@ -30,19 +46,20 @@
 
         // List of shopping items
         var toBuyItems = [
-            { name: "cookies", quantity: 10 },
-            { name: "chips", quantity: 5 },
-            { name: "jerky", quantity: 5 },
-            { name: "coke", quantity: 2 },
-            { name: "ice cream", quantity: 1 }
+            { name: "cookies", quantity: 10, pricePerItem: 2 },
+            { name: "chips", quantity: 5, pricePerItem: 2 },
+            { name: "jerky", quantity: 5, pricePerItem: 2 },
+            { name: "coke", quantity: 2, pricePerItem: 2 },
+            { name: "ice cream", quantity: 1, pricePerItem: 2 }
         ];
 
         var boughtItems = [];
 
-        service.addItem = function(itemName, quantity) {
+        service.addItem = function(itemName, quantity, pricePerUnit) {
             var item = {
                 name: itemName,
-                quantity: quantity
+                quantity: quantity,
+                totalPrice: quantity * pricePerUnit
             };
             boughtItems.push(item);
         };
@@ -57,6 +74,14 @@
 
         service.getBoughtItems = function() {
             return boughtItems;
+        }
+    }
+
+    function trippleDollarSignsFilter() {
+        return function(value) {
+            value = value || "";
+            value = "$$$" + value;
+            return value;
         }
     }
 
