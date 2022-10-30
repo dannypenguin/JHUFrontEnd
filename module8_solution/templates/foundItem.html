@@ -1,0 +1,6 @@
+<div style="clear:both;">
+    <ol>
+        <li ng-repeat="item in list.foundItems"><p>{{item.name}}, <b>{{item.short_name}}</b>, <i>{{item.description}}</i></p><div><button ng-click="list.onRemove({index: $index});" class="btn btn-danger delete-button">Don't want this one!</button></div></li>
+    </ol>
+</div>
+<div class="error" ng-if="list.isResults()">Nothing found</div>
