@@ -12,8 +12,7 @@
             restrict: 'E',
             scope: {
                 foundItems: '<',
-                onRemove: '&',
-                hasSearched: '<'
+                onRemove: '&'
             },
             controller: FoundItemsDirectiveController,
             controllerAs: 'list',
@@ -27,10 +26,14 @@
         var list = this;
 
         list.isResults = function() {
-            if (list.hasSearched === false) {
+            if (list.foundItems.hasSearched !== true) {
                 return false;
             } else {
-                return (list.foundItems.length === 0 ? true : false);
+                if (list.foundItems.hasResults === true) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         }
     }
@@ -40,21 +43,29 @@
     function NarrowItDownController(MenuSearchService) {
         var narrowItDown = this;
         narrowItDown.searchTerm = '';
-        narrowItDown.found = [];
-        narrowItDown.hasSearched = false;
+        narrowItDown.found = {
+            results: [],
+            hasResults: false,
+            hasSearched: false
+        };
 
         narrowItDown.getMenuResults = function() {
             var promise = MenuSearchService.getMatchedMenuItems(narrowItDown.searchTerm);
+            narrowItDown.found.hasSearched = true;
             promise.then(function(result) {
-                narrowItDown.found = result;
-                narrowItDown.hasSearched = true;
+                narrowItDown.found.results = result;
+                if (result.length > 0) {
+                    narrowItDown.found.hasResults = true;
+                } else {
+                    narrowItDown.found.hasResults = false;
+                }
             }).catch(function(error) {
                 console.log("Something went terribly wrong");
             })
         }
 
         narrowItDown.removeItem = function(itemIndex) {
-            narrowItDown.found.splice(itemIndex, 1);
+            narrowItDown.found.results.splice(itemIndex, 1);
         }
     }
 
@@ -63,16 +74,21 @@
     function MenuSearchService($http) {
         var service = this;
 
+        /* the commented code would strip the whitespace before search but will catch more unexpected results e.g. "ice" would match with sliced */
         service.getMatchedMenuItems = function(searchTerm) {
             return $http({
                 method: "GET",
                 url: ("https://davids-restaurant.herokuapp.com/menu_items.json")
             }).then(function(result) {
                 var foundItems = [];
-                if (result && searchTerm.trim().length !== 0) {
+                // searchTerm = searchTerm.replace(/\s/g, "").toLowerCase();
+                searchTerm = searchTerm.trim().toLowerCase();
+                if (result && searchTerm.length !== 0) {
                     let menu = result.data.menu_items
                     for (let i = 0; i < menu.length; i++) {
-                        if (menu[i].description.toLowerCase().indexOf(searchTerm.trim().toLowerCase()) != -1) {
+                        // var filteredDesc = menu[i].description.replace(/\s/g, "").toLowerCase();
+                        var filteredDesc = menu[i].description.trim().toLowerCase();
+                        if (filteredDesc.indexOf(searchTerm) != -1) {
                             foundItems.push(menu[i]);
                         }
                     }
