@@ -11,7 +11,7 @@
         service.getAllCategories = function () {
             return $http({
                 method: "GET",
-                url: ("https://davids-restaurant.herokuapp.com/categories.json")
+                url: ("https://coursera-jhu-default-rtdb.firebaseio.com/categories.json")
             }).then(function(result) {
                 return result.data;
             });
@@ -20,8 +20,9 @@
         service.getItemsForCategory = function (categoryShortName) {
             return $http({
                 method: "GET",
-                url: (`https://davids-restaurant.herokuapp.com/menu_items.json?category=${categoryShortName}`)
+                url: (`https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/${categoryShortName}.json`)
             }).then(function(result) {
+                console.l
                 return result.data.menu_items;
             });
         }
