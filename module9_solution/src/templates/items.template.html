@@ -1,0 +1,7 @@
+<h3>Menu Items</h3>
+<ul>
+    <li ng-repeat="item in itemDetail.items">
+        <b>{{ item.name }}</b>
+        <p ng-if="item.description"><i>Description:</i> {{ item.description }}</p>
+    </li>
+</ul>
