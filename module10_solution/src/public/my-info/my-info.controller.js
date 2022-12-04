@@ -4,8 +4,11 @@
     angular.module('public')
         .controller('MyInfoController', MyInfoController);
 
-    function MyInfoController() {
+    MyInfoController.$inject = ['SignUpService'];
+
+    function MyInfoController(SignUpService) {
         var myInfoCtrl = this;
+        myInfoCtrl.user = SignUpService.getSignUp();
 
 
     }

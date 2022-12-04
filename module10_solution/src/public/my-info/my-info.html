@@ -1,1 +1,17 @@
-<h1 test>test</h1>
+<div class="container">
+    <ul ng-if="myInfoCtrl.user" class="list-group" id="info-container">
+        <li class="list-group-item">
+            <h1>My Information</h1>
+        </li>
+        <li class="list-group-item"><b>First Name: </b>{{ myInfoCtrl.user.firstname }}</li>
+        <li class="list-group-item"><b>Last Name: </b>{{ myInfoCtrl.user.lastname }}</li>
+        <li class="list-group-item"><b>Email: </b>{{ myInfoCtrl.user.email }}</li>
+        <li class="list-group-item"><b>Phone: </b>{{ myInfoCtrl.user.phone }}</li>
+        <li class="list-group-item"><b>Favorite Dish Short Name: </b>{{ myInfoCtrl.user.favorite | uppercase }}</li>
+        <li class="list-group-item"><b>Favorite Dish Name: </b>{{ myInfoCtrl.user.display_name }}</li>
+        <li class="list-group-item"><b>Favorite Dish Description: </b>{{ myInfoCtrl.user.display_desc }}</li>
+        <li class="list-group-item"><b>Favorite Dish Image: </b><img ng-src="{{ myInfoCtrl.user.display_img }}" alt="Image of favorite item" /></li>
+    </ul>
+
+    <span ng-if="!myInfoCtrl.user">Not Signed Up Yet. <a ui-sref="public.signup">Sign up Now!</a></span>
+</div>
