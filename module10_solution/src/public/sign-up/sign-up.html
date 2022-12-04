@@ -33,14 +33,10 @@
             <span ng-show="signUpForm.favorite.$error.shortname || (signUpForm.favorite.$invalid && signUpForm.favorite.$touched)">No such menu number exists</span>
             <br>
             <button ng-disabled="signUpForm.$invalid" ng-click="signUpCtrl.submit()">Submit</button>
-            <!-- <div style="margin-top: 10px;">
-                Form valid? {{ signUpCtrl.$valid }}
-            </div> -->
         </form>
     </fieldset>
     <div id="info" ng-if="signUpCtrl.completed">
         Your information has been saved!
-        <!-- Firstname: {{ signUpCtrl.user.firstname}} <br> Email: {{ signUpCtrl.user.email}} <br> Phone: {{ signUpCtrl.user.phone }} -->
     </div>
 
 </div>
