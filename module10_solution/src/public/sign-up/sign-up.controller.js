@@ -13,7 +13,6 @@
             var parsed = SignUpService.getCategoryAndNumber(signUpCtrl.user.favorite);
             var imageUrl = 'images/menu/' + parsed.shortname + '/' + signUpCtrl.user.favorite.toUpperCase() + '.jpg'
             var favoriteObject = SignUpService.checkItems(parsed.shortname, parsed.itemnumber, Object.keys(menuCategories), menuCategories);
-            console.log(imageUrl);
             if (favoriteObject.isValid) {
                 SignUpService.setSignUpInfo({...signUpCtrl.user, display_name: favoriteObject.itemName, display_desc: favoriteObject.itemDesc, display_img: imageUrl });
                 signUpCtrl.completed = true;
