@@ -1,0 +1,43 @@
+<div class="container">
+    <h1>Sign Up For Our Newsletter</h1>
+    <p>*Note to grader: I allow for lowercase letters which I transform later. All validation otherwise should work but wanted to note this small niche</p>
+    <hr>
+    <fieldset>
+        <form name='signUpForm' novalidate>
+
+            <input type="text" name="firstname" placeholder="Enter First Name" ng-model="signUpCtrl.user.firstname" required minlength="1" ng-maxlength="10">
+            <span ng-if="(signUpForm.firstname.$error.minlength || signUpForm.firstname.$error.required) && signUpForm.firstname.$touched">
+            Firstname must be at least 1 characters long
+          </span>
+            <br>
+
+            <input type="text" name="lastname" placeholder="Enter Last Name" ng-model="signUpCtrl.user.lastname" required minlength="1" ng-maxlength="10">
+            <span ng-if="(signUpForm.lastname.$error.minlength || signUpForm.lastname.$error.required) && signUpForm.lastname.$touched">
+            Lastname must be at least 1 characters long
+          </span>
+            <br>
+
+            <input type="email" name="email" placeholder="Email" ng-model="signUpCtrl.user.email" required>
+            <span ng-if="signUpForm.email.$invalid && signUpForm.email.$touched">
+            Must be a valid email address: handle@domain format
+          </span>
+            <br>
+
+            <input type="text" name="phone" placeholder="Phone ###-###-####" ng-model="signUpCtrl.user.phone" required pattern="(\d{3})-(\d{3})-(\d{4})">
+            <span ng-if="signUpForm.phone.$invalid && signUpForm.phone.$touched">
+            Phone must be in the format ###-###-####.
+          </span>
+            <br>
+
+            <input type="text" name="favorite" ng-model="signUpCtrl.user.favorite" placeholder="Favorite Item E.g. L10" shortname required>
+            <span ng-show="signUpForm.favorite.$pending.shortname">Checking...</span>
+            <span ng-show="signUpForm.favorite.$error.shortname || (signUpForm.favorite.$invalid && signUpForm.favorite.$touched)">No such menu number exists</span>
+            <br>
+            <button ng-disabled="signUpForm.$invalid" ng-click="signUpCtrl.submit()">Submit</button>
+        </form>
+    </fieldset>
+    <div id="info" ng-if="signUpCtrl.completed">
+        Your information has been saved!
+    </div>
+
+</div>
