@@ -123,13 +123,15 @@ describe('signup', function() {
 
     it('should respond true that a menu item matches', function() {
         $httpBackend.whenGET(ApiBasePath + '/menu_items.json').respond(partialJSONResponse);
-        var response = signup.checkItems('A', 11, Object.keys(partialJSONResponse), partialJSONResponse)
+        var potentialInput = signup.getCategoryAndNumber('a11');
+        var response = signup.checkItems(potentialInput.shortname, potentialInput.itemnumber, Object.keys(partialJSONResponse), partialJSONResponse)
         expect(response).toEqual({ isValid: true, itemName: "Young Chow Won Ton Soup (for 2)", itemDesc: "clear chicken broth with vegetables, veal, chicken, and beef and won tons" });
     });
 
     it('should respond false that a menu item does not match', function() {
         $httpBackend.whenGET(ApiBasePath + '/menu_items.json').respond(partialJSONResponse);
-        var response = signup.checkItems('A', 25, Object.keys(partialJSONResponse), partialJSONResponse)
+        var potentialInput = signup.getCategoryAndNumber('a25');
+        var response = signup.checkItems(potentialInput.shortname, potentialInput.itemnumber, Object.keys(partialJSONResponse), partialJSONResponse)
         expect(response).toEqual({ isValid: false, itemName: "", itemDesc: "" });
     });
 
